@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<!--
+Copyright © 2019 Nikitenko Maxim. All rights reserved.
+-->
+<head>
+    <meta charset="UTF-8">
+    
+    <title>
+        Химия и её история
+    </title>
+	<link rel="shortcut icon" href="assets/images/icon.png" type="x-icon">
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+    <meta name="description" content="Интерактивная таблица химических элементов"> 
+
+    <script src="assets/data/generalInfo.json"></script>
+    <script src="assets/data/historyElement.json"></script>
+    <script src="assets/data/globalEvents.json"></script>
+    <script src="assets/libs/jquery.min.js"></script>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+    
+        <!--Задний фон-->
+    <div id="backImage1" class="backImage1"></div>
+    <div id="backImage2" class="backImage2"></div>
+
+    <noscript>
+        <h3>В вашем браузере отключен JavaScript, без него таблица не работает.</h3>
+        <h5>инструкции по включению JavaScript для <a href="https://www.google.com/search?q=%D0%B2%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5+javascript+%D0%B2+chrome">Chrome</a>, <a href="https://ru.wikihow.com/%D0%B2%D0%BA%D0%BB%D1%8E%D1%87%D0%B8%D1%82%D1%8C-Javascript-%D0%B2-Mozilla-Firefox">Firefox</a>, <a href="https://www.google.com/search?q=как+включить+javascript+в+opera">Opera</a>.</h5>
+        <img src="assets/images/offline.png" width="100%" style="margin-bottom: 300px;">
+    </noscript>
+
+        <!--Основная таблица в которой размещаются хим. элементы-->
+    <table class="gridTable" id="gridTable"></table>
+
+        <!--Окно справки-->
+    <div id="helpWindow" class="popUpBackground" style="display: none">
+        <div class="popUpForeground" onclick="hideHelp()"></div>
+        <div class="popUpWindow">
+            <img class="popUpWindowContent" src="assets/images/help.png" alt="chem.xkcd.su">
+        </div>
+    </div>
+
+        <!--Окно инструкции для установки-->
+    <div id="downInstructionWindow" class="popUpBackground" style="display: none">
+        <div class="popUpForeground" onclick="hideHelp()"></div>
+        <div class="popUpWindow" style="width: 60%">
+            <h3>Инструкция по установке оффлайн-версии</h1>
+            <ol class="downloadInstruction">
+                <li>Укажите папку, в которой будет храниться интерактивная таблица.<br>Если вам не предлагалось выбрать путь то файл уже скачан; нажмите <span class="mono">Ctrl</span>+<span class="mono">J</span> чтобы открыть папку загрузки.</li>
+                <li>Нажмите правой кнопкой мыши по файлу и нажите &laquo;Распаковать архив в текущую папку&raquo;.</li>
+                <li>В создавшейся папке откройте любым современным браузером файл <span class="mono">index.html</span><br>Если вашим браузером по-умочанию является Internet Explorer, то нажмите на файл правой кнопкой мыши и найдите пункт &laquo;Открыть с помощью...&raquo;, где выберите подходящий вариант.</li>
+                <li>Теперь всегда обращайтесь к <span class="mono">index.html</span> когда нужно будет запустить таблицу в оффлайн-режиме.</li>
+            </ol> 
+        </div>
+    </div>
+
+        <!--Ссылка для установки оффлайн версии-->
+    <a tabindex="-1" id="downloadLink" class="downloadIcon" download="Интерактивная таблица.zip" href="assets/install.zip" style="display:inline" onclick="showDownInstruction()">
+        <img src="assets/images/down.png" id="downloadIcon">
+    </a>
+    
+        <!--Хронологический перечень событий-->
+    <p class="container-global-events" id="globalEventsBlocks">
+    </p>
+
+        <!--Окно информации об элементе-->
+    <div id="overlay"></div>
+    <div id="anim-element"></div>
+	<div id="info-window"> 
+		<div id="info-window-content" class="elementContain">
+            
+            <div id="elementContain">
+                <h1 id="elementPopUpTitle"></h1>
+                <pre id="elementProperties" style="display: inline-block; font-size: 15px; text-align: left; width: 400px;"></pre>
+                <p id="elementPopUpTextContainer">
+                
+                    <span id="elementPopUpText"></span>
+                    <br>
+                    <span style="display: inline-block; width: 100%; text-align: right;">
+                        <a id="wikiLink" target='_blank'>
+                            Перейти на Википедию
+                        </a>
+                    </span>
+                </p>
+            </div>
+
+        </div>
+    </div>
+    
+</body>
+
+<script type="text/javascript" src="assets/main.js"></script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+     ▄███████▄  ▄██████▄   ▄█        ▄█      ███                   ███      ▄██████▄     ▄███████▄
+    ███    ███ ███    ███ ███       ███  ▀█████████▄           ▀█████████▄ ███    ███   ███    ███
+    ███    ███ ███    ███ ███       ███▌    ▀███▀▀██              ▀███▀▀██ ███    ███   ███    ███
+    ███    ███ ███    ███ ███       ███▌     ███   ▀               ███   ▀ ███    ███   ███    ███
+  ▀█████████▀  ███    ███ ███       ███▌     ███       ▀█████▄     ███     ███    ███ ▀█████████▀
+    ███        ███    ███ ███       ███      ███          ▀▀▀▀▀    ███     ███    ███   ███
+    ███        ███    ███ ███▌    ▄ ███      ███                   ███     ███    ███   ███
+   ▄████▀       ▀██████▀  █████▄▄██ █▀      ▄████▀                ▄████▀    ▀██████▀   ▄████▀
+                          ▀
+-->
