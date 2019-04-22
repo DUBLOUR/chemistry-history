@@ -240,7 +240,7 @@ function setSizeTable(width, height) {
 
 function changeBackImage() {
     nowBackground = (nowBackground + 1) % cntBackgrounds;
-    var link = 'url("images/background_' + nowBackground + '.jpg")';
+    var link = 'url("assets/images/background_' + nowBackground + '.jpg")';
     document.getElementById("backImage1").style.backgroundImage = link;
     document.getElementById("backImage2").style.backgroundImage = link;
 }
