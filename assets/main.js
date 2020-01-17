@@ -16,7 +16,7 @@ function initializationPage() {
 
     initTable();
     fitTable();
-    setYear(2019);
+    setYear(2020);
     writeGlobalEvent();
     initializationKeyEvent();
     initializationDragStrip();
@@ -165,21 +165,6 @@ function stopAnimation() {
     document.getElementById('slideContainer').style.visibility = 'visible';
 
 }
-
-function runAnimation() {
-    setTimeout( function() {
-        setYear(animationYear);
-
-        if ( ++animationYear <= 2019 )
-            runAnimation();
-        else {
-            animationYear = 1730;
-            stopAnimation();
-        }
-    }, 0*1000 / (2019 - 1730) )
-}
-
-//runAnimation();
 
 function fitTable() {
     var nowSizeWindow = [window.innerWidth, window.innerHeight];
@@ -359,7 +344,7 @@ function initTable() {
                 cell.setAttribute("class", "titleContainer");
                 var div = document.createElement('div');
                 div.className = "title";
-                div.innerHTML = '<span id="yearBlock" class="yearBlock">2019</span>';
+                div.innerHTML = '<span id="yearBlock" class="yearBlock">2020</span>';
 
                 cell.appendChild(div);
                 row.appendChild(cell);
@@ -381,8 +366,8 @@ function initTable() {
                 input.setAttribute("id", "inputRangeSlider");
                 input.setAttribute("type", "range");
                 input.setAttribute("min", "1730");
-                input.setAttribute("max", "2019");
-                input.setAttribute("value", "2019");
+                input.setAttribute("max", "2020");
+                input.setAttribute("value", "2020");
                 input.setAttribute("ondblclick", "addYearPoint()");
                 input.setAttribute("oninput", "showYear()");
                 input.setAttribute("autofocus", "autofocus");
